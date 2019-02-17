@@ -72,7 +72,9 @@ room.onTeamGoal = function(team) {
                         
                     }
 
-                }else room.sendChat("GOL CONTRA DO " + lastPlayerTouched +" , QUE FILHA DA PUTA!");
+                }else {
+			room.sendChat("GOL CONTRA DO " + players[i].name +" , QUE FILHA DA PUTA!");
+		}	
             }
         }
     
