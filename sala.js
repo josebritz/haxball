@@ -49,33 +49,30 @@ room.onTeamGoal = function(team) {
     var players = room.getPlayerList();
  
         for(var i = 0; i < players.length; i++) {
-            if(players[i].id==lastPlayerTouched)
-            {
-                if(players[i].team==team)
-                {
-                    if(players[i].id!=assistingTouch && assistingTouch!="")
-                    {
-                        gols[String(players[i].id)] +=1;
-                        assistencias[assistingTouch] +=1;
-                        room.sendChat("GOL DO " + players[i].name + ". ASSISTENCIA DO " + assistingTouch + ". JÁ FEZ " + gols[String(players[i].id)] + " GOLS.");
-                        assistingTouch = "";
-                        lastPlayerTouched = "";
-                       
-                    
+            if(players[i].id==lastPlayerTouched && players[i].team==team) {
+		    if(players[i].id!=assistingTouch && assistingTouch!="")
+		    {
+			gols[String(players[i].id)] +=1;
+			assistencias[assistingTouch] +=1;
+			room.sendChat("GOL DO " + players[i].name + ". ASSISTENCIA DO " + assistingTouch + ". JÁ FEZ " + gols[String(players[i].id)] + " GOLS.");
+			assistingTouch = "";
+			lastPlayerTouched = "";
 
-                    }else
-                    {
-                        gols[String(players[i].id)] +=1;
-                        room.sendChat("GOL DO " + players[i].name + ". JÁ FEZ " + gols[String(players[i].id)] + " GOLS. ESSA FERA AI.");
-                        assistingTouch = "";
-                        lastPlayerTouched = "";
-                        
-                    }
 
-                }else {
-			room.sendChat("GOL CONTRA DO " + players[i].name +" , QUE FILHA DA PUTA!");
-		}	
-            }
+
+		    }else
+		    {
+			gols[String(players[i].id)] +=1;
+			room.sendChat("GOL DO " + players[i].name + ". JÁ FEZ " + gols[String(players[i].id)] + " GOLS. ESSA FERA AI.");
+			assistingTouch = "";
+			lastPlayerTouched = "";
+
+		    }
+
+                	
+            } else if(players[i].id==lastPlayerTouched && players[i].team!=team){
+			room.sendChat("GOL CONTRA DO " + players[i].name);
+		}
         }
     
 }
